@@ -25,16 +25,28 @@ class ManualLogincontroller extends Controller
         'firstname'   => 'required',
         'password' => 'required'
       ]);
-      if (Auth::guard('student')->attempt(['firstname' => $request->firstname, 'password' => $request->password], $request->remember)) {
+       $check=[
+            'firstname' => $request->firstname,
+             'password' => $request->password
+       ];
+      if(Auth::guard('student')->attempt($check))
+      {
+          return redirect()->intended(route('student.index'));
+      }else
+      {
+          return redirect()->back();
+      }
+    }
+       /*{
         // if successful, then redirect to their intended location
         //dd($request->firstname);
-        return redirect()->intended(route('students.index'));
+        
       } 
       // if unsuccessful, then redirect back to the login with the form data
-      return redirect()->back();
-      //dd(Auth::guard('student'));
+      //
+      dd(Auth::guard('student'));
       //dd($request->password);
-    }
+    }*/
     public function logout()
     {
         Auth::guard('student')->logout();

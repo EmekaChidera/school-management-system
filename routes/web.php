@@ -27,7 +27,7 @@ Route::get('/admin/students/create',"Admin\AdminController@StudentCreate");
 Route::post('/admin/students/create',"Admin\AdminController@StudentStore");
 Route::get('student/login','ManualLoginController@showLoginForm')->name('student.login');
 Route::post('student/login','ManualLoginController@login')->name('student.login.submit');
-Route::get('/logout','ManualLoginController@logout')->name('student.logout');
+Route::get('student/logout','ManualLoginController@logout')->name('student.logout');
 Route::get('/student','ManualAuthController@index')->name('student.index');
 
 //faculty

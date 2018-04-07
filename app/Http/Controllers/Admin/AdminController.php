@@ -68,7 +68,7 @@ class AdminController extends Controller
             'state'=>$request->get('state'),
             'country'=>$request->get('country'),
             'RegNo'=>$reg,
-            'password'=>$request->get('surname')
+            'password'=>\Hash::make($request->get('surname'))
 
         ));
         $students->save();
