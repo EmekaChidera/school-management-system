@@ -13,8 +13,22 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(191);
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('surname');
+            $table->string('firstname');
+            $table->string('middlename')->nullable();
+            $table->string('address')->nullable();
+            $table->string('nationality');
+            $table->string('religion')->nullable();
+            $table->string('contact');
+            $table->string('blood');
+            $table->date('dob');
+            $table->string('gender');
+            $table->string('email')->unique();
+            $table->string('state');
+            $table->string('country');
             $table->timestamps();
         });
     }

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\People;
-
+use App\Http\Requests\StudentRequest;
 class AdminController extends Controller
 {
     /**
@@ -21,7 +21,9 @@ class AdminController extends Controller
 
     public function StudentIndex()
     {
-        return view("admin.students.index");
+        $students=Student::all();
+        //dd($students);
+        return view("admin.students.index",compact('students'));
     }
 
     /**
@@ -38,16 +40,39 @@ class AdminController extends Controller
     {
         return view('admin.students.create');
     }
+  
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illumie\Http\Response
      */
-    public function store(Request $request)
+    public function StudentStore(StudentRequest $request)
     {
-        //
+        $count=Student::count();
+        $count += 1;
+        $reg="1028".$count;
+        $students=new Student(array(
+            'surname'=>$request->get('surname'),
+            'firstname'=>$request->get('firstname'),
+            'middlename'=>$request->get('middlename'),
+            'address'=>$request->get('address'),
+            'nationality'=>$request->get('nationality'),
+            'religion'=>$request->get('religion'),
+            'contact'=>$request->get('contact'),
+            'dob'=>$request->get('dob'),
+            'gender'=>$request->get('gender'),
+            'blood'=>$request->get('blood'),
+            'email'=>$request->get('email'),
+            'state'=>$request->get('state'),
+            'country'=>$request->get('country'),
+            'RegNo'=>$reg,
+            'password'=>$request->get('surname')
+
+        ));
+        $students->save();
+        return redirect('/admin/students');
     }
 
     /**
